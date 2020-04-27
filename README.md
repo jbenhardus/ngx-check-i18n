@@ -7,7 +7,7 @@ A utility that checks angular projects for duplicate ids in `i18n` attributes. I
 
 `<div i18n="@@loremIpsum2">sed do eiusmod tempor incididunt</div>`
 
-The utility will flag the mismatch in untranslated text as an error. The utility will also identify instances where the casing differs between untranslated text, and flag it as a warning.
+The utility will flag the mismatch in untranslated text for the `@@loremIpsum2` id as an error. The utility will also identify instances where the casing differs between untranslated text, and flag it as a warning.
 
 ## Installation
 
