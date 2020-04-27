@@ -64,7 +64,7 @@ if (numWarnings > 0) {
   Object.keys(warnings).forEach((key) => {
     shell.echo(("key: " + key).yellow);
     shell.echo("values:".yellow);
-    errors[key].values.forEach((val) => {
+    warnings[key].values.forEach((val) => {
       shell.echo((" - " + val).yellow);
     });
   });
