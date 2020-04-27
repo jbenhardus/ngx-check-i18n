@@ -59,8 +59,6 @@ matches.forEach((match) => {
   });
 });
 
-const numTags = Object.keys(tags).length;
-shell.echo(numTags + " tags found.");
 const numWarnings = Object.keys(warnings).length;
 if (numWarnings > 0) {
   console.warn(
@@ -84,5 +82,18 @@ if (numErrors > 0) {
       shell.echo((" - " + val).red);
     });
   });
+}
+shell.echo("======== Summary ========");
+const numTags = Object.keys(tags).length;
+shell.echo(numTags + " tags found");
+if (numWarnings > 0) {
+  shell.echo(`${numWarnings} warning${numWarnings == 1 ? "" : "s"}`.yellow);
+} else {
+  shell.echo("0 warnings".green);
+}
+if (numErrors > 0) {
+  shell.echo(`${numErrors} error${numErrors == 1 ? "" : "s"}`.red);
   process.exit(1);
+} else {
+  shell.echo("0 errors".green);
 }
