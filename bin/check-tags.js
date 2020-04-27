@@ -25,19 +25,21 @@ matches.forEach((match) => {
   var elements = root.querySelectorAll("[i18n]");
   elements.forEach((el) => {
     var key = el.getAttribute("i18n");
-    var value = el.innerHTML.trim();
-    var compare = tags[key];
-    if (compare) {
-      if (compare != value) {
-        var existingError = errors[key];
-        if (existingError) {
-          existingError.values.push(value);
-        } else {
-          errors[key] = { values: [compare, value] };
+    if (key != "") {
+      var value = el.innerHTML.trim();
+      var compare = tags[key];
+      if (compare) {
+        if (compare != value) {
+          var existingError = errors[key];
+          if (existingError) {
+            existingError.values.push(value);
+          } else {
+            errors[key] = { values: [compare, value] };
+          }
         }
+      } else {
+        tags[key] = value;
       }
-    } else {
-      tags[key] = value;
     }
   });
 });
