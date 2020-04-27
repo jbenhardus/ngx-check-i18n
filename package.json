@@ -19,5 +19,9 @@
   "license": "MIT",
   "bin": {
     "ngx-check-i18n": "bin/check-tags.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesbenhardus/ngx-check-i18n.git"
   }
 }
