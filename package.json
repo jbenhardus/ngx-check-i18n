@@ -1,0 +1,23 @@
+{
+  "name": "ngx-check-i18n",
+  "version": "0.0.1",
+  "description": "Check Angular projects for duplicated i18n tags",
+  "main": "index.js",
+  "dependencies": {
+    "colors": "1.4.0",
+    "minimatch": "^3.0.4",
+    "node-html-parser": "1.2.14",
+    "path": "^0.12.7",
+    "shelljs": "^0.8.3",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James Benhardus",
+  "license": "MIT",
+  "bin": {
+    "ngx-check-i18n": "bin/check-tags.js"
+  }
+}
