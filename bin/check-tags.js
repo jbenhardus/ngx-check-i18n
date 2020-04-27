@@ -18,6 +18,7 @@ var matches = findMatches(dir, []);
 
 var tags = {};
 var errors = {};
+var warnings = {};
 
 matches.forEach((match) => {
   var file = fs.readFileSync(match).toString();
@@ -30,11 +31,20 @@ matches.forEach((match) => {
       var compare = tags[key];
       if (compare) {
         if (compare != value) {
-          var existingError = errors[key];
-          if (existingError) {
-            existingError.values.push(value);
+          if (compare.toLowerCase() == value.toLowerCase()) {
+            var exisitingWarning = warnings[key];
+            if (exisitingWarning) {
+              exisitingWarning.values.push(value);
+            } else {
+              warnings[key] = { values: [compare, value] };
+            }
           } else {
-            errors[key] = { values: [compare, value] };
+            var existingError = errors[key];
+            if (existingError) {
+              existingError.values.push(value);
+            } else {
+              errors[key] = { values: [compare, value] };
+            }
           }
         }
       } else {
@@ -46,6 +56,20 @@ matches.forEach((match) => {
 
 const numTags = Object.keys(tags).length;
 shell.echo(numTags + " tags found.");
+const numWarnings = Object.keys(warnings).length;
+if (numWarnings > 0) {
+  console.warn(
+    `${numWarnings} warning${numWarnings == 1 ? "" : "s"} found:`.yellow
+  );
+  Object.keys(warnings).forEach((key) => {
+    shell.echo(("key: " + key).yellow);
+    shell.echo("values:".yellow);
+    errors[key].values.forEach((val) => {
+      shell.echo((" - " + val).yellow);
+    });
+  });
+  throw new Error("Duplicate tags found");
+}
 const numErrors = Object.keys(errors).length;
 if (numErrors > 0) {
   console.error(`${numErrors} error${numErrors == 1 ? "" : "s"} found:`.red);
