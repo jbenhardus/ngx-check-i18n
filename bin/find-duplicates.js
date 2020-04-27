@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 var colors = require("colors");
-var findMatches = require("./find-matches");
+var findFiles = require("./find-files");
 var fs = require("fs");
 var HTMLParser = require("node-html-parser");
 var shell = require("shelljs");
@@ -15,7 +15,7 @@ var dir = argv.path || ".";
 var paths = argv.paths || [dir];
 
 var matches = [];
-paths.forEach((dir) => findMatches(dir, matches));
+paths.forEach((dir) => findFiles(dir, matches));
 
 var tags = {};
 var errors = {};
@@ -28,7 +28,7 @@ matches.forEach((match) => {
   elements.forEach((el) => {
     var key = el.getAttribute("i18n");
     if (key != "") {
-      var value = el.innerHTML.trim();
+      var value = el.innerHTML.trim().replace(/\s+/g, " ");
       var compare = tags[key];
       if (compare) {
         if (compare != value) {

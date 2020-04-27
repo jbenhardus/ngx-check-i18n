@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 
-function findMatches(directory, matches) {
+function findFiles(directory, matches) {
   const files = fs.readdirSync(directory);
   files.forEach((file) => {
     var filepath = path.join(directory, file);
@@ -10,10 +10,10 @@ function findMatches(directory, matches) {
     }
     var stat = fs.lstatSync(filepath);
     if (stat && stat.isDirectory()) {
-      matches = findMatches(filepath, matches);
+      matches = findFiles(filepath, matches);
     }
   });
   return matches;
 }
 
-module.exports = findMatches;
+module.exports = findFiles;
