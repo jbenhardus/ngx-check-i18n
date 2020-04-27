@@ -34,14 +34,18 @@ matches.forEach((match) => {
           if (compare.toLowerCase() == value.toLowerCase()) {
             var exisitingWarning = warnings[key];
             if (exisitingWarning) {
-              exisitingWarning.values.push(value);
+              if (!exisitingWarning.values.includes(value)) {
+                exisitingWarning.values.push(value);
+              }
             } else {
               warnings[key] = { values: [compare, value] };
             }
           } else {
             var existingError = errors[key];
             if (existingError) {
-              existingError.values.push(value);
+              if (!existingError.values.includes(value)) {
+                existingError.values.push(value);
+              }
             } else {
               errors[key] = { values: [compare, value] };
             }
@@ -68,7 +72,6 @@ if (numWarnings > 0) {
       shell.echo((" - " + val).yellow);
     });
   });
-  throw new Error("Duplicate tags found");
 }
 const numErrors = Object.keys(errors).length;
 if (numErrors > 0) {
