@@ -1,6 +1,6 @@
 {
   "name": "ngx-check-i18n",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Check Angular projects for duplicated i18n tags",
   "main": "index.js",
   "dependencies": {

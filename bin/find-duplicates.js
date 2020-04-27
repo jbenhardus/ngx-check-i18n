@@ -12,7 +12,10 @@ var yargs = require("yargs").option("paths", {
 var argv = yargs.argv;
 
 var dir = argv.path || ".";
-var paths = argv.paths || [dir];
+var paths = argv.paths || [];
+if (!paths.includes(dir)) {
+  paths.push(dir);
+}
 
 var matches = [];
 paths.forEach((dir) => findFiles(dir, matches));
