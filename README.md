@@ -1,5 +1,13 @@
 # ngx-check-i18n
-A utility that checks angular projects for duplicate ids in `i18n` attributes.
+A utility that checks angular projects for duplicate ids in `i18n` attributes. It is designed to prevent mistranslations through accidental reuse of tags. Consider the following example where an `i18n` id is accidentally re-used:
+
+`<div i18n="@@loremIpsum1">Lorem ipsum dolor sit amet</div>`
+
+`<div i18n="@@loremIpsum2">consectetur adipiscing elit</div>`
+
+`<div i18n="@@loremIpsum2">sed do eiusmod tempor incididunt</div>`
+
+The utility will flag the mismatch in untranslated text as an error. The utility will also identify instances where the casing differs between untranslated text, and flag it as a warning.
 
 ## Installation
 
