@@ -5,16 +5,17 @@ var findMatches = require("./find-matches");
 var fs = require("fs");
 var HTMLParser = require("node-html-parser");
 var shell = require("shelljs");
-var yargs = require("yargs");
+var yargs = require("yargs").option("paths", {
+  type: "array",
+});
 
 var argv = yargs.argv;
 
-if (argv.message) {
-  shell.echo(argv.message);
-}
-
 var dir = argv.path || ".";
-var matches = findMatches(dir, []);
+var paths = argv.paths || [dir];
+
+var matches = [];
+paths.forEach((dir) => findMatches(dir, matches));
 
 var tags = {};
 var errors = {};
@@ -83,5 +84,5 @@ if (numErrors > 0) {
       shell.echo((" - " + val).red);
     });
   });
-  throw new Error("Duplicate tags found");
+  process.exit(1);
 }
